@@ -1,0 +1,31 @@
+Data processing and differential expression analysis
+
+We searched the TCGA (https://portal.gdc.cancer.gov/) and GTEx（Genotype tissue expression) database from UCSC XENA (https://xenabrowser.net/datapages/) uniformly processed by the Toil. The RNAseq data of the CBX3 gene in TPM format in tumor tissues and matching non-tumor normal tissues were downloaded from the database, and then log2 transformation was performed. Later, R (version 3.6.3) software was utilized to contrast the expression of tumor tissues samples, non-tumor normal tissue samples and paired samples. P < 0.05 indicated differential expression between tumor and non-tumor normal tissue. The R package "ggpubr" is utilized to plot boxplots.
+To evaluate the effectiveness of CBX3 expression in distinguishing tumors from normal samples, ROC analysis was performed on paired samples using pROC packages. The calculated AUC range from 0.5 to 0.1, indicating an identification potential of 50% to 100%.
+
+Immunohistochemical (IHC) staining
+To assess the differences of CBX3 in protein expression level, the IHC image was downloaded and analyzed from HPA (http://www.proteinatlas.org/). The image shows the CBX3 protein expression in non-tumor normal tissue and 6 tumor tissue, that include breast cancer (BRCA), colon adenocarcinoma (COAD), stomach adenocarcinoma(STAD), pancreatic adenocarcinoma (PAAD), lung adenocarcinoma (LUAD), and liver hepatocellular carcinoma (LIHC).
+
+Relationship among CBX3 expression and prognosis and clinical phenotype
+The clinical phenotypic and survival data were collected from each sample accessed from the TCGA. Three indicators including progression-free interval (PFI), disease-specific survival (DSS), and overall survival (OS) were chosen to assess the link between the expression of CBX3 and the prognosis of patients. The log-rank test and Kaplan-Meier (KM) technique were utilized for survival analysis of each tumor type (P < 0.05). The survival curve was charted by the R package "Survival" and "SurvMiner". In addition, Cox analysis was executed by R package "survival" and "forestplot" to ascertain the Pan-cancer  connection between the expression of CBX3 and survival.
+
+2 kinds of clinical phenotypes, i.e., age of patient and stage of tumor were chosen and their link to CBX3 expression was discussed. The participants were categorized into 2 cohorts, with those aged 60 years designated as the critical value. R packages "LIMMA" and "GGPUBR" were used for correlation analysis of clinical phenotypes. P < 0.05 was judged to have a significant difference.
+
+Correlation of CBX3 expression with TMB and tumor MSI
+TMB has been recognized as a quantifiable immune response biomarker that signifies the number of mutations in the tumor cells[16]. MSI is caused by a DNA mismatch repair defect (MMR) and is linked to patient prognosis[17]. The TMB score is computed by a Perl script and adjusted premised on the sum of the length of the exons apart. The MSI grades of all samples were determined according to the somatic mutation data downloaded from TCG, and Spearman rank correlation coefficient was utilized to assess the correlation among CBX3 expression, TMB and MSI. The result is displayed as a radar diagram, generated with R packages "ggradar" and "ggplot2".
+
+Relationship between CBX3 expression of and immunity
+Single sample gene set enrichment analysis (ssGSEA) is utilized in the computation of the enrichment score of the corresponding gene set for each sample with a given gene set[18]. SsGSEA algorithm in immune infiltration computes the enrichment score of 24 kinds of immune cells in each tumor sample with the "GSVA" package in R software. R packages "GGploT2", "GGpubr" and "ggExtra" were utilized to assess the link between the levels of CBX3 and the infiltration levels of each immune cell in the tumor (P < 0.05 was judged as having a significant difference).
+
+XCELL is a tool utilized for computing the enrichment score of each cell type premised on the gene expression profile[19]. The xCELL algorithm was used to compute the stromal score, immune score, and microenvironment score for each of the tumor specimens. The correlation between CBX3 levels and the above scores of each tumor sample was assessed using the R package "Immunedeconv" and the "GGploT2" package for the visualization of the results.
+
+In addition, we utilized the R package "Limma" to evaluate the correlation between CBX3 and immune-related genes, including immune checkpoint, immune activation, immune suppression gene, chemokines and chemokine receptor proteins. The "Reshape2" and "RColorBreyer" packages are respectivly utilized for visualizing the outcomes.
+
+Correlation between CBX3 expression and DNA methylation
+DNA methylation is a well-recognized kind of DNA chemical alteration. Premised on its vital function in regulating gene transcription, DNA methylation might be carcinogenic[20]. The link between the expression of CBX3 and the DNA methylation of each of the tumors was evaluated utilizing the HM450 methylation data from cBioPortal (www.cbioportal.org). KM survival analysis was utilized to assess CBX3 methylation and OS. P < 0.05 was judged as having a significant difference.
+
+Biological significance of CBX3 expression in tumors
+The gene set enrichment analysis (GSEA) was carried out to study the biological role of CBX3 in tumors. We then downloaded the gene ontology (GO) and Kyoto encyclopedia gene and genome (KEGG) genetic set from GSEA official webpage (https://www.gsea-msigdb.org/gsea/downloads.jsp). Enable R packages "Limma", "org.Hs.eg.db", "clusterProfiler" and "enrichPlot" to be utilized for functional analysis.
+
+Statistical analysis
+Normalization of all gene expression data was done utilizing LOG2 transformation. The cancer tissues and non-tumor normal tissues were contrasted by two groups of T-test; P < 0.05 indicates results that are statistically significant. The log-rank test, KM curves,  as well as, Cox proportional risk regression models were utilized for all the survival analyses performed in this research. Spearman's test was utilized to examine the link between the two variables. P < 0.05 was judged as having a significant difference. All the statistical analyses conducted in this research were processed by R software (version 3.6.3).
